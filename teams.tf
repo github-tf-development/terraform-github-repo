@@ -6,7 +6,6 @@ resource "github_team" "all" {
     for team in csvdecode(file("teams.csv")) :
     team.name => team
   }
-
   name                      = each.value.name
   description               = each.value.description
   privacy                   = each.value.privacy
@@ -21,7 +20,7 @@ resource "null_resource" "wait" {
 }
 
 resource "github_team_membership" "members" {
-  depends_on =[null_resource.wait]
+  depends_on =[github_team.all]
   for_each = { for tm in local.team_members : tm.name => tm }
 
   team_id  = each.value.team_id
