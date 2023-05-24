@@ -14,6 +14,7 @@ resource "github_team" "all" {
 }
 
 resource "github_team_membership" "members" {
+  depends_on =[github_team.all]
   for_each = { for tm in local.team_members : tm.name => tm }
 
   team_id  = each.value.team_id
