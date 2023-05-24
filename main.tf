@@ -3,6 +3,7 @@
 
 provider "github" {
   token = var.GITHUB_ORG_TOKEN
+  owner = var.GITHUB_ORG_NAME
 }
 
 # Retrieve information about the currently (PAT) authenticated user
